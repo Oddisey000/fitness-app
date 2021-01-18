@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Tabs, Tab } from "@material-ui/core";
 
+import { muscles } from "../../shared/store.data";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
@@ -25,9 +27,10 @@ export default function TabsComponent() {
         textColor="primary"
         centered
       >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
+        <Tab label="All" />
+        {muscles.map((muscle) => (
+          <Tab label={muscle} />
+        ))}
       </Tabs>
     </Paper>
   );
