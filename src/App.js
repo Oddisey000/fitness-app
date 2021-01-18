@@ -1,11 +1,16 @@
 import React from "react";
 import "./styles.css";
 
+import Header from "./components/header/header.component";
+import Footer from "./components/footer/footer.component";
+import Body from "./components/body/body.component";
+
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      <Header />
+      <Body />
+      <Footer />
     </div>
   );
 }
