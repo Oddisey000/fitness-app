@@ -29,7 +29,7 @@ export default function TabsComponent() {
       >
         <Tab label="All" />
         {muscles.map((muscle) => (
-          <Tab label={muscle} />
+          <Tab label={muscle} key={muscle} />
         ))}
       </Tabs>
     </Paper>

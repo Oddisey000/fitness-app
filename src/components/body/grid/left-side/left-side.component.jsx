@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
+
+import SimpleList from "./list-component/list.component";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,15 +12,29 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary
+  },
+  typography: {
+    textTransform: "capitalize"
   }
 }));
 
-export default function LeftBodyGrid() {
+const LeftBodyGrid = ({ exercises }) => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>Left</Paper>
+      <Paper className={classes.paper}>
+        {exercises.map(([group, exercises]) => (
+          <Typography className={classes.typography} variant="h5" key={group}>
+            {group}
+            {/** This will unpack all the data from exercises objects and pass it to list component*/}
+            {exercises.map((exercise) => (
+              <SimpleList {...exercise} key={exercise.id} />
+            ))}
+          </Typography>
+        ))}
+      </Paper>
     </div>
   );
-}
+};
+
+export default LeftBodyGrid;
