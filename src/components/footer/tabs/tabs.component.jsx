@@ -1,8 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Tabs, Tab } from "@material-ui/core";
-
-import { muscles } from "../../shared/store.data";
+import { filterExercises } from "../../../redux/exercises/exercises.actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,12 +10,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TabsComponent() {
+const TabsComponent = ({ exercises, filterExercises }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if (newValue === 0) {
+      filterExercises(exercises.data);
+    } else {
+      const filteredData = exercises.muscles
+        .filter(([category]) => category === newValue)
+        .map(([data, object]) => object);
+      filterExercises(filteredData[0]);
+    }
   };
 
   return (
@@ -28,10 +36,24 @@ export default function TabsComponent() {
         centered
       >
         <Tab label="All" />
-        {muscles.map((muscle) => (
-          <Tab label={muscle} key={muscle} />
+        {exercises.muscles.map(([muscle]) => (
+          <Tab label={muscle} key={muscle} value={muscle} />
         ))}
       </Tabs>
     </Paper>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    exercises: state.exercises
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    filterExercises: (item) => dispatch(filterExercises(item))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabsComponent);

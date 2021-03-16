@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,7 +9,12 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    height: 500,
+    overflowY: "auto"
+  },
+  wMessage: {
+    marginTop: 20
   }
 }));
 
@@ -18,7 +23,12 @@ export default function RightBodyGrid() {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>Right</Paper>
+      <Paper className={classes.paper}>
+        <Typography variant="h5">Welcome!</Typography>
+        <Typography className={classes.wMessage}>
+          Please select the exercise from the list on the left
+        </Typography>
+      </Paper>
     </div>
   );
 }

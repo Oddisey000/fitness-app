@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
-  exercises: []
+  data: [],
+  exercises: [],
+  muscles: []
 };
 
 export default INITIAL_STATE;
